@@ -1,8 +1,8 @@
-package com.example.modelMapper.Service;
+package com.example.modelmapper.service;
 
-import com.example.modelMapper.exception.ProductNotFoundException;
-import com.example.modelMapper.entity.Product;
-import com.example.modelMapper.repository.ProductRepository;
+import com.example.modelmapper.exception.ProductNotFoundException;
+import com.example.modelmapper.entity.Product;
+import com.example.modelmapper.repository.ProductRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 

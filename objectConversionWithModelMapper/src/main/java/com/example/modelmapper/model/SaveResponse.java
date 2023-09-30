@@ -1,6 +1,5 @@
-package com.example.modelMapper.model;
+package com.example.modelmapper.model;
 
-import com.example.modelMapper.entity.Product;
 import lombok.Data;
 
 @Data

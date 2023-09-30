@@ -1,7 +1,7 @@
-package com.example.modelMapper.util;
+package com.example.modelmapper.util;
 
-import com.example.modelMapper.entity.Product;
-import com.example.modelMapper.model.ProductDetailsDto;
+import com.example.modelmapper.entity.Product;
+import com.example.modelmapper.model.ProductDetailsDto;
 import org.modelmapper.ModelMapper;
 import org.modelmapper.PropertyMap;
 import org.springframework.context.annotation.Bean;
@@ -17,7 +17,7 @@ public class ModelMapperConfig {
         modelMapper.addMappings(new PropertyMap<Product, ProductDetailsDto>() {
             @Override
             protected void configure() {
-                map().setID(source.getProductID());
+                map().setId(source.getProductID());
                 map().setName(source.getProductName());
                 map().setPrice(source.getProductPrice());
                 map().setQuantity(source.getProductQuantity());

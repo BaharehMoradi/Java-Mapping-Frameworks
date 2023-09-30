@@ -1,12 +1,12 @@
-package com.example.modelMapper.Controller;
+package com.example.modelmapper.controller;
 
-import com.example.modelMapper.Service.ProductService;
-import com.example.modelMapper.exception.ProductNotFoundException;
-import com.example.modelMapper.entity.Product;
-import com.example.modelMapper.model.ProductDetailsDto;
-import com.example.modelMapper.model.ProductDto;
-import com.example.modelMapper.model.SaveResponse;
-import com.example.modelMapper.util.MapperMethods;
+import com.example.modelmapper.service.ProductService;
+import com.example.modelmapper.exception.ProductNotFoundException;
+import com.example.modelmapper.entity.Product;
+import com.example.modelmapper.model.ProductDetailsDto;
+import com.example.modelmapper.model.ProductDto;
+import com.example.modelmapper.model.SaveResponse;
+import com.example.modelmapper.util.MapperMethods;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -22,6 +22,8 @@ public class ProductController {
     private final ProductService productService;
 
     private final MapperMethods mapperMethods;
+
+    private static final String CONSTANTOUTSTRING = "There is no product with the entered id=";
     /**
      * save new product:
      * @param product
@@ -30,7 +32,7 @@ public class ProductController {
     @PostMapping("/addProduct")
     public ResponseEntity<?> add(@RequestBody @Valid Product product) {
         Product persistedProduct = productService.saveProduct(product);
-        ProductDto persistedProductDto = mapperMethods.mapProduct_To_ProductDto(persistedProduct);
+        ProductDto persistedProductDto = mapperMethods.mapProductToProductDto(persistedProduct);
         SaveResponse response = new SaveResponse();
         response.setMessage("The product was saved with below information:");
         response.setProduct(persistedProductDto);
@@ -41,13 +43,13 @@ public class ProductController {
     public ResponseEntity<?> get(@RequestBody Integer id) {
         try {
             Product fetchedProduct = productService.getProduct(id);
-            ProductDto fetchedProductDto = mapperMethods.mapProduct_To_ProductDto(fetchedProduct);
+            ProductDto fetchedProductDto = mapperMethods.mapProductToProductDto(fetchedProduct);
             return ResponseEntity.ok(fetchedProductDto);//status code: 200
 
         } catch (ProductNotFoundException e) {
             e.printStackTrace();
             return ResponseEntity.status(HttpStatus.NOT_FOUND)
-                    .body("There is no product with the entered id="+id+" to display!"); //status code: 404
+                    .body(CONSTANTOUTSTRING +id+" to display!"); //status code: 404
         }
     }
 
@@ -60,14 +62,14 @@ public class ProductController {
         } catch (ProductNotFoundException e) {
             e.printStackTrace();
             return ResponseEntity.status(HttpStatus.NOT_FOUND)
-                    .body("There is no product with the entered id=" + id + " to display!");
+                    .body(CONSTANTOUTSTRING + id + " to display!");
         }
     }
 
     @GetMapping("/getAllProduct")
     public ResponseEntity<?> list() {
         List<Product> listProducts = productService.listAllProduct();
-        List<ProductDto> listProductsDto= mapperMethods.mapListOfProduct_To_ListOfProductDto(listProducts);
+        List<ProductDto> listProductsDto= mapperMethods.mapListOfProductToListOfProductDto(listProducts);
         if (listProducts.isEmpty()) {
             return ResponseEntity.status(HttpStatus.NOT_FOUND)
                     .body("There is no product to display!");//status code: 404
@@ -84,7 +86,7 @@ public class ProductController {
         } catch (ProductNotFoundException e) {
             e.printStackTrace();
             return ResponseEntity.status(HttpStatus.NOT_FOUND)
-                    .body("There is no product with the entered id="+id+" to remove!");
+                    .body(CONSTANTOUTSTRING +id+" to remove!");
         }
     }
 }

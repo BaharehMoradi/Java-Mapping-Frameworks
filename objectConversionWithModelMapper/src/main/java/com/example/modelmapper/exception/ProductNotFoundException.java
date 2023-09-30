@@ -1,4 +1,4 @@
-package com.example.modelMapper.exception;
+package com.example.modelmapper.exception;
 
 public class ProductNotFoundException  extends Exception{
 }

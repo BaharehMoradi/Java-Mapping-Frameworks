@@ -1,4 +1,4 @@
-package com.example.modelMapper.entity;
+package com.example.modelmapper.entity;
 
 import jakarta.persistence.*;
 import lombok.Data;
@@ -15,21 +15,21 @@ public class Product {
     @Column(length = 16)
     private Integer productID;
 
-    @Column(name = "Name",nullable = false)
+    @Column(name = "name",nullable = false)
     private String productName;
 
-    @Column(name = "Price",nullable = false)
+    @Column(name = "price",nullable = false)
     private float productPrice;
 
-    @Column(name = "Quantity",nullable = false)
+    @Column(name = "quantity",nullable = false)
     private int productQuantity;
 
-    @Column(name = "Brand")
+    @Column(name = "brand")
     private String productBrand;
 
-    @Column(name = "Weight")
+    @Column(name = "weight")
     private float productWeight;
 
-    @Column(name = "Color")
+    @Column(name = "color")
     private String productColor;
 }
